@@ -1,0 +1,22 @@
+name: "Star Harp"
+
+description: ""
+
+sources: "events"
+
+generator:
+  type: "sampler"
+  sample: "./Harp"
+
+map:
+  - output: "time"
+    input_range: ["0%", "101%"]
+  - output: "pitch"
+  - output: "volume"
+    output_range: [0.3, 1]
+  - output: "pan"
+  - output: "pitch_shift"
+    input_range: [0, 1]
+    output_range: [0, 1]
+
+notes: ["F2", "G2", "C3", "D3", "F3", "G3", "C4", "D4", "F4", "G4", "C5", "D5"]

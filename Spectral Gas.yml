@@ -1,0 +1,22 @@
+name: 'Spectral Gas'
+
+description: ''
+
+sources: 'events'
+
+generator:
+  type: 'spectralizer'
+  mods:
+    filter: 'on'
+    min_freq: 40
+    max_freq: 1000
+    regen_phases: 'True'
+    interpolation_type: 'preserve_power'
+    equal_loudness_normalisation: 'False'
+
+
+map:
+  - output: 'spectrum'
+  - output: 'pitch'
+
+notes: 'A2'
