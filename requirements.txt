@@ -1,4 +1,4 @@
-git+https://github.com/james-trayford/strauss.git@v1p5
+git+https://github.com/james-trayford/strauss.git@note-aliases
 scipy
 statsmodels
 numpy
