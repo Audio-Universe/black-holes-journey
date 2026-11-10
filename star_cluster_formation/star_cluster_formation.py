@@ -35,13 +35,15 @@ If using the command line, navigate to the directory containing the script and r
 # Whether to display data plots (change as applicable)
 view_plots = False
 
-import strauss
+from strauss.audio_figure import AudioFigure
 from scipy.optimize import curve_fit
 from statsmodels.distributions.empirical_distribution import ECDF
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from pathlib import Path
+
+afig = AudioFigure()
 
 seed = 35  # set random number generator seed so can have conistent results
 sonification_length = 20  # set sonification length
@@ -172,7 +174,7 @@ rescaled_x = (x_positions - np.min(x_positions)) / (np.max(x_positions) - np.min
 pitch_jitter = np.random.normal(0, 0.01, len(x_positions))
 
 # Sonify star formation and add to the 'Audio Figure'
-strauss.sonify(formation_times, 
+afig.sonify(formation_times, 
                current_star_formation_rate, 
                current_star_formation_rate,
                rescaled_x,
@@ -203,7 +205,7 @@ if view_plots:
     plt.show() 
 
 # Sonify gas cloud synth
-strauss.sonify(time_array, 
+afig.sonify(time_array, 
                cloud_collapse, 
                duration=sonification_length,
                style="styles/Gas Synth.yml",)
@@ -274,12 +276,13 @@ if view_plots:
     plt.title('Gas Cloud Spectrum')
     plt.show()
 
-# Sonify spectraliser
-strauss.sonify([spec_stack.T], 
-               [1], 
-               duration=sonification_length,
-               style="styles/Spectral Gas.yml")
+# # Sonify spectraliser
+# afig.sonify([spec_stack.T], 
+#                [1], 
+#                duration=sonification_length,
+#                style="styles/Spectral Gas.yml")
 
-# Write all 3 sonification layers to audio file
-strauss.save('StarClusterFormation.wav')
-strauss.close()
+# # Write all 3 sonification layers to audio file
+# afig.save('StarClusterFormation.wav')
+
+afig.animate_mapping(fname='star_formation_animated_plot.mp4', ffmpeg_output=True)
