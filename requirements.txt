@@ -1,0 +1,5 @@
+git+https://github.com/james-trayford/strauss.git@v1p5
+scipy
+statsmodels
+numpy
+matplotlib

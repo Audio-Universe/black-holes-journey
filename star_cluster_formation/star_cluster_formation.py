@@ -16,7 +16,7 @@ How to use this script:
 
 You will need to have Python installed as well as the necessary dependencies.
 
-1. To install the dependencies (if you haven't already) run:
+1. To install the dependencies (if you haven't already), run:
 'pip install -r requirements.txt'
 
 2. Set the VIEW_PLOTS variable at the top of the script to True/False depending on whether 
@@ -33,7 +33,7 @@ If using the command line, navigate to the directory containing the script and r
 """
 
 # Whether to display data plots (change as applicable)
-view_plots = False
+view_plots = True
 
 import strauss
 from scipy.optimize import curve_fit
@@ -41,6 +41,10 @@ from statsmodels.distributions.empirical_distribution import ECDF
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+from pathlib import Path
+
+# Get current directory for file paths
+SCRIPT_DIR = Path(__file__).resolve().parent
 
 seed = 35  # set random number generator seed so can have conistent results
 sonification_length = 20  # set sonification length
@@ -177,7 +181,7 @@ strauss.sonify(formation_times,
                rescaled_x,
                pitch_jitter,
                duration=sonification_length,
-               style='Star Harp.yml',
+               style=str(SCRIPT_DIR / 'Star Harp.yml'),
                system="stereo",
                level="20 db")
 
@@ -206,7 +210,7 @@ if view_plots:
 strauss.sonify(time_array, 
                cloud_collapse, 
                duration=sonification_length,
-               style="Gas Synth.yml",
+               style=str(SCRIPT_DIR / "Gas Synth.yml"),
                system="mono")
 
 # Spectraliser for gas cloud collapse
@@ -279,7 +283,7 @@ if view_plots:
 strauss.sonify([spec_stack.T], 
                [1], 
                duration=sonification_length,
-               style="Spectral Gas.yml",
+               style=str(SCRIPT_DIR / "Spectral Gas.yml"),
                system="stereo")
 
 # Write all 3 sonification layers to audio file
